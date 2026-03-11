@@ -14,9 +14,9 @@ namespace terrain{
         sizeType Z;
         terrain(sizeType axis, sizeType yxis, sizeType zxis);
         private:
-            std::vector<double> terrainMap;
+            std::vector<bool> terrainMap;
             void perlin(sizeType x, sizeType y, sizeType z)
-
+            float neighborScore(sizeType x, sizeType y, sizeType z);
         
     }
 
