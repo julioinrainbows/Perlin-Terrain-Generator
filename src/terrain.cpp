@@ -19,7 +19,7 @@ using namespace pn;
         for(int i = 0; i < x; ++i) for(int j = 0; j < y; ++j){
             double n = Perlin.noise(i * scale, j * scale);
             n = (n + 1.0) * 0.5;
-            n = std::pow(n,  2,71828/std::pow(scale,-10);
+            n = std::pow(n,  3.14157/std::pow(scale);
              
             heightMap[i*y + j] = static_cast<int>(n * maxHeight);
         }  
