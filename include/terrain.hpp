@@ -21,7 +21,7 @@ namespace terrains{
             return heightMap[x1*y + x];
         }
         
-        void saveToVox(std::string path);
+        void saveToVox(std::string path) const;
 
     private:
         
