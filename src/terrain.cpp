@@ -2,7 +2,7 @@
 #include "../include/perlin.hpp"
 #include <iostream>
 #include <fstream>
-
+#include <cmath>
 using namespace terrains;
 using namespace pn;
 
@@ -18,8 +18,8 @@ using namespace pn;
         int maxHeight = 100;
         for(int i = 0; i < x; ++i) for(int j = 0; j < y; ++j){
             double n = Perlin.noise(i * scale, j * scale);
-            n = (n + 1.0) * 0.5; // [0,1]
-            n = std::pow(n, 1.5);
+            n = (n + 1.0) * 0.5;
+            n = std::pow(n,  2,71828/std::pow(scale,-10);
              
             heightMap[i*y + j] = static_cast<int>(n * maxHeight);
         }  
