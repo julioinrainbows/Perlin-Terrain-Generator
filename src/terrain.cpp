@@ -1,28 +1,32 @@
 #include "../include/terrain.hpp"
 #include "../include/perlin.hpp"
 #include <iostream>
+#include <fstream>
+
 using namespace terrains;
 using namespace pn;
 
 
-    terrain::terrain(sizeType axis, sizeType width, sizeType height) : x(axis), y(width), z(height) {
+    terrain::terrain(sizeType axis, sizeType width) : x(axis), y(width){
         perlin Perlin;
-        terrainMap.resize(x*y*z);
-        float scale = 0.015;
-        auto index = [&](int x1, int y1, int z1){
-            return x1*(y*z) + y1*z + z1;
+        heightMap.resize(x*y);
+        auto index = [=](int x1, int y1){
+            return x1*width + y1;
         };
 
-        for(int i = 0; i < x; ++i) for(int j = 0; j < y; ++j) for(int k = 0; k < z; ++k){
-            double scale = 0.43;
-            terrainMap[index(i,j,k)] = Perlin.noise(scale*i,scale*j,scale*k);
-        }                   
-    };
+        double scale = 0.035;
+        int maxHeight = 100;
+        for(int i = 0; i < x; ++i) for(int j = 0; j < y; ++j){
+            double n = Perlin.noise(i * scale, j * scale);
+            n = (n + 1.0) * 0.5; // [0,1]
+            n = std::pow(n, 1.5);
+             
+            heightMap[i*y + j] = static_cast<int>(n * maxHeight);
+        }  
 
+    };    
 
+    
 int main(){
-    terrain heightMap(12,12,12);   
-    for(int i = 0; i < 12; ++i) for(int j = 0; j < 12; ++j) for(int k = 0; k < 12; ++k){
-        std::cout << heightMap.pointValue(i,j,k) << " ";
-    }        
+    terrain heightMap(600,600);
 }

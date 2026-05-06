@@ -2,26 +2,32 @@
 #include <algorithm>
 #include <random>
 #include <cstdlib>
+#include <array>
 
-#ifndef TERRAIN_HPP
-#define TERRAIN_HPP
+#pragma once
+
 namespace terrains{
     using sizeType = std::size_t;
-    class terrain{
-    public:
-        terrain(sizeType axis, sizeType width, sizeType height); //Default Constructor
 
+    class terrain{
+
+    public:
+        terrain(sizeType axis, sizeType width); //Default Constructor
+        
         sizeType getX() {return x;}
         sizeType gety() {return y;}
-        sizeType getz() {return z;}
 
-        double pointValue(int x1, int y1 , int z1 ) {return terrainMap[x1*(y*z) + y1*z + z1];}
+        uint8_t heightValue(int x1, int y1){
+            return heightMap[x1*y + x];
+        }
+        
+        void saveToVox(std::string path);
+
     private:
-
+        
         sizeType x;
         sizeType y;
-        sizeType z;
-        std::vector<double> terrainMap; 
+        std::vector<uint8_t>heightMap; 
         // void perlin(sizeType x, sizeType y, sizeType z)
 
 
@@ -30,4 +36,3 @@ namespace terrains{
 
 
 };
-#endif
