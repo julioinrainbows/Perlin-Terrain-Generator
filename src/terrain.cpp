@@ -2,7 +2,7 @@
 #include "../include/perlin.hpp"
 #include <iostream>
 #include <fstream>
-#include <cmath>
+
 using namespace terrains;
 using namespace pn;
 
